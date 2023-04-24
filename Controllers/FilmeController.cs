@@ -25,7 +25,7 @@ public class FilmeController : ControllerBase
     public IActionResult AdicionaFilme(
         [FromBody] CreateFilmeDto filmeDto)
     {
-        Filme filme = _mapper.Map<Filme>(filmeDto);   
+        Filme filme = _mapper.Map<Filme>(filmeDto);
         _context.Filmes.Add(filme);
         _context.SaveChanges();
         return CreatedAtAction(nameof(RecuperaFilmePorId),
@@ -35,9 +35,15 @@ public class FilmeController : ControllerBase
 
     [HttpGet]
     public IEnumerable<ReadFilmeDto> RecuperaFilmes([FromQuery] int skip = 0,
-        [FromQuery] int take = 50)
+        [FromQuery] int take = 50, [FromQuery] string? nomeCinema = null)
     {
-        return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take));
+        if (nomeCinema == null)
+        {
+            return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).ToList());
+        }
+        return _mapper.Map<List<ReadFilmeDto>>(_context.Filmes.Skip(skip).Take(take).Where(filme => filme.Sessoes
+         .Any(sessao => sessao.Cinema.Nome == nomeCinema)).ToList();
+
     }
 
     [HttpGet("{id}")]
@@ -53,15 +59,15 @@ public class FilmeController : ControllerBase
     public IActionResult AtualizarFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
     {
         var filme = _context.Filmes.FirstOrDefault(
-            filme => filme.Id == id); 
-        if(filme == null) return NotFound();
+            filme => filme.Id == id);
+        if (filme == null) return NotFound();
         _mapper.Map(filmeDto, filme);
         _context.SaveChanges();
         return NoContent();
     }
 
     [HttpPatch("id")]
-    public IActionResult AtualizarFilmeParcial(int id, 
+    public IActionResult AtualizarFilmeParcial(int id,
             JsonPatchDocument<UpdateFilmeDto> patch)
     {
         var filme = _context.Filmes.FirstOrDefault(
@@ -72,7 +78,7 @@ public class FilmeController : ControllerBase
 
         patch.ApplyTo(filmeParaAtualizar, ModelState);
 
-        if(TryValidateModel(filmeParaAtualizar))
+        if (TryValidateModel(filmeParaAtualizar))
         {
             return ValidationProblem(ModelState);
         }
@@ -88,8 +94,8 @@ public class FilmeController : ControllerBase
            filme => filme.Id == id);
         if (filme == null) return NotFound();
 
-        _context.Remove(filme); 
-        _context.SaveChanges(); 
+        _context.Remove(filme);
+        _context.SaveChanges();
         return NoContent();
     }
 }

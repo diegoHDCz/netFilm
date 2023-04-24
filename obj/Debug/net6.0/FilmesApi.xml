@@ -4,16 +4,28 @@
         <name>FilmesApi</name>
     </assembly>
     <members>
-        <member name="T:FilmesApi.Migrations.CriandoTabelaDeFilme">
+        <member name="T:FilmesApi.Migrations.RestaurarBanco">
             <inheritdoc />
         </member>
-        <member name="M:FilmesApi.Migrations.CriandoTabelaDeFilme.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FilmesApi.Migrations.RestaurarBanco.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FilmesApi.Migrations.CriandoTabelaDeFilme.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:FilmesApi.Migrations.RestaurarBanco.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:FilmesApi.Migrations.CriandoTabelaDeFilme.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:FilmesApi.Migrations.RestaurarBanco.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:FilmesApi.Migrations.Deleterestrict">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesApi.Migrations.Deleterestrict.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesApi.Migrations.Deleterestrict.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:FilmesApi.Migrations.Deleterestrict.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
     </members>
